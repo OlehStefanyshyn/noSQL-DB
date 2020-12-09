@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cassandra;
-using DalCassandra;
-using DalCassandra.Concrete;
-using DTOCassandra;
+using CassandraDAL;
+using CassandraDAL.Concrete;
+using CassandraDTO;
 
 
 namespace ConsoleForTests
