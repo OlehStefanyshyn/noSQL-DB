@@ -9,7 +9,7 @@ using CassandraDAL.Concrete;
 using CassandraDTO;
 
 
-namespace ConsoleForTests
+namespace Tests
 {
     class Program
     {
@@ -39,8 +39,8 @@ namespace ConsoleForTests
             var updated =cDal.UpdatePost(to_update);
             Console.WriteLine("Updated: {0}",updated.Body);
             Console.ReadLine();
-            */
-            /*
+           
+     
             var added_post = cDal.AddPost(new PostDTO
             {
                 Author_Id = 1,
@@ -61,12 +61,6 @@ namespace ConsoleForTests
             {
                 SDal.AddPostToUsersS(p, new List<long>() { 1 });
             }
-            */
-            //streamDal.GetSForUser(1);
-            //streamDal.AddPostToUsersS(posts[0], new List<string>() {"Login"});
-            
-            //var uDal = new UserDALCassandra(keyspace: "social_network", nodes: nodes);
-            //uDal.GetAllUsers();
 
         }
     }
