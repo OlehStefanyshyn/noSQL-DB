@@ -9,15 +9,15 @@ namespace Neo4jDal.Interface
 {
     public interface IFollowerDal
     {
-        void ToFollow(UserLableDTO from, UserLableDTO to);
-        void ToFollow(int from, int to);
-        void NewUser(UserLableDTO u);
+        void AddUser(UserLableDTO u);
         void DeleteUser(UserLableDTO u);
         UserLableDTO GetUserById(int id);
-        void DeleteInfo(UserLableDTO u1, UserLableDTO u2);
-        bool IsInfo(UserLableDTO u1, UserLableDTO u2);
-        bool IsInfoC(int from, int to);
-        int Path(UserLableDTO u1, UserLableDTO u2);
-        int Path(int id1, int id2);
+        void DeleteAllRelationships(UserLableDTO u1, UserLableDTO u2);
+        void AddFollow(UserLableDTO from, UserLableDTO to);
+        void AddFollow(int from, int to);
+        bool HasAnyRelationship(UserLableDTO u1, UserLableDTO u2);
+        bool HasRelationship(int from, int to);
+        int MinPathBetween(UserLableDTO u1, UserLableDTO u2);
+        int MinPathBetween(int id1, int id2);
     }
 }

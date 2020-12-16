@@ -31,7 +31,7 @@ namespace BusinessLogic.Concrete
                 this._FollowerDal.AddUser(new UserLableDTO { UserId = user.UserId, UserLogin = user.UserLogin });
                 return true;
             }
-            catch (Exception exp)
+            catch(Exception exp)
             {
                 return false;
             }
@@ -40,7 +40,7 @@ namespace BusinessLogic.Concrete
         public void Follow(int from, int to)
         {
             var u = this._mongoDal.GetUserById(from);
-            if (!u.FollowedIdList.Contains(to))
+            if(!u.FollowedIdList.Contains(to))
             {
                 u.FollowedIdList.Add(to);
                 this._FollowerDal.AddFollow(from, to);

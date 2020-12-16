@@ -26,7 +26,7 @@ namespace BusinessLogic.Concrete
             var post = this._postDal.GetPostById(PostId);
             if (post.Likes.Where(p => p.UserId == UserId).Count() != 0)
             {
-                this._postDal.UnLike(PostId, new LikeDTO { UserId = UserId });
+                this._postDal.UnLike(PostId, new LikeDTO{ UserId = UserId });
             }
             if (post.Dislikes.Where(p => p.UserId == UserId).Count() == 0)
             {
@@ -37,13 +37,13 @@ namespace BusinessLogic.Concrete
         public void AddLikeToPost(int PostId, int UserId)
         {
             var post = this._postDal.GetPostById(PostId);
-            if (post.Dislikes.Where(p => p.UserId == UserId).Count() != 0)
+            if(post.Dislikes.Where(p => p.UserId == UserId).Count() != 0)
             {
                 this._postDal.UnDislike(PostId, new DislikeDTO { UserId = UserId });
             }
-            if (post.Likes.Where(p => p.UserId == UserId).Count() == 0)
+            if(post.Likes.Where(p => p.UserId == UserId).Count() == 0)
             {
-                this._postDal.Like(PostId, new LikeDTO() { UserId = UserId });
+                this._postDal.Like(PostId, new LikeDTO() {UserId=UserId });
             }
         }
 

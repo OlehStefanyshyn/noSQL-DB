@@ -15,16 +15,19 @@ namespace MongoDTO
         public string Id { get; set; }
         [BsonElement("UserId")]
         public int UserId { get; set; }
-        [BsonElement("UserName")]
-        public string UserName { get; set; }
-        [BsonElement("UserLName")]
-        public string UserLastName { get; set; }
         [BsonElement("UserLogin")]
         public string UserLogin { get; set; }
         [BsonElement("UserPassword")]
         public string UserPassword { get; set; }
+        [BsonElement("UserName")]
+        public string UserName { get; set; }
+        [BsonElement("UserLastName")]
+        public string UserLastName { get; set; }
         [BsonElement("Email")]
         public string Email { get; set; }
+        [BsonElement("Interests")]
+        public List<string> Interests { get; set; }
+
         [BsonElement("FollowedIdList")]
         public List<int> FollowedIdList { get; set; }
     }

@@ -1,0 +1,2 @@
+D:\НБД\ConsoleApp1 – копія\BussinesLogic\obj\Debug\BussinesLogic.csprojAssemblyReference.cache
+D:\НБД\ConsoleApp1 – копія\BussinesLogic\obj\Debug\BussinesLogic.csproj.CoreCompileInputs.cache

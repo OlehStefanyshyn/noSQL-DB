@@ -11,21 +11,21 @@ namespace MongoDal.Concrete
 {
     public class PostDal : IPostDal
     {
-        private readonly string conct;
-        private readonly string DBname;
+        private readonly string _conn;
+        private readonly string _DbName;
 
         public PostDal(string conn, string DbName)
         {
-            this.conct = conn;
-            this.DBname = DbName;
+            this._conn = conn;
+            this._DbName = DbName;
         }
 
         public void AddCommentToPost(int id, CommentDTO comment)
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var UpdateFilter = Builders<PostDTO>.Update.AddToSet("Comments", comment);
                 posts.UpdateOne(g => g.PostId == id, UpdateFilter);
@@ -40,8 +40,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var count_id = posts.CountDocuments(p => p.PostId > 0);
                 post.PostId = (int)count_id + 1;
@@ -60,8 +60,8 @@ namespace MongoDal.Concrete
             {
                 var post = this.GetPostById(post_id);
                 var comment = post.Comments[comment_id - 1];
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
 
                 var UpdateFilter = Builders<PostDTO>.Update.Pull("Comments", comment);
@@ -77,8 +77,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 posts.DeleteOne(p => p.PostId == id);
             }
@@ -92,8 +92,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var UpdateFilter = Builders<PostDTO>.Update.AddToSet("Dislikes", dislike);
                 posts.UpdateOne(g => g.PostId == post_id, UpdateFilter);
@@ -108,8 +108,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
 
                 var all_posts = posts.Find(p => p.PostId > 0).ToList();
@@ -125,8 +125,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var founded = posts.Find(p => p.PostId == id).Single();
                 return founded;
@@ -141,8 +141,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var UpdateFilter = Builders<PostDTO>.Update.AddToSet("Likes", like);
                 posts.UpdateOne(g => g.PostId == post_id, UpdateFilter);
@@ -157,8 +157,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var UpdateFilter = Builders<PostDTO>.Update.Pull("Dislikes", dislike);
                 posts.UpdateOne(g => g.PostId == post_id, UpdateFilter);
@@ -173,8 +173,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var posts = db.GetCollection<PostDTO>("Posts");
                 var UpdateFilter = Builders<PostDTO>.Update.Pull("Likes", like);
                 posts.UpdateOne(g => g.PostId == post_id, UpdateFilter);

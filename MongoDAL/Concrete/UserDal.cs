@@ -12,19 +12,19 @@ namespace MongoDal.Concrete
 {
     public class UserDal : IUserDal
     {
-        private readonly string conct;
-        private readonly string DBname;
+        private readonly string _conn;
+        private readonly string _DbName;
         public UserDal(string conn,string DbName)
         {
-            this.conct = conn;
-            this.DBname = DbName;
+            this._conn = conn;
+            this._DbName = DbName;
         }
         public UserDTO CreateUser(UserDTO user)
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var users = db.GetCollection<UserDTO>("Users");
 
                 user.UserPassword = Convert.ToBase64String(hash(user.UserPassword, "1jdkskjns"));
@@ -50,8 +50,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var users = db.GetCollection<UserDTO>("Users");
                 users.DeleteOne(p => p.UserId == id);
             }
@@ -65,8 +65,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var users = db.GetCollection<UserDTO>("Users");
 
                 var all_users = users.Find(p => p.UserId >= 0).ToList();
@@ -82,8 +82,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var users = db.GetCollection<UserDTO>("Users");
 
                 
@@ -100,8 +100,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var users = db.GetCollection<UserDTO>("Users");
                 var founded = users.Find(p => p.UserLogin == login).Single();
                 return founded;
@@ -137,8 +137,8 @@ namespace MongoDal.Concrete
         {
             try
             {
-                var client = new MongoClient(conct);
-                var db = client.GetDatabase(DBname);
+                var client = new MongoClient(_conn);
+                var db = client.GetDatabase(_DbName);
                 var users = db.GetCollection<UserDTO>("Users");
 
                 var UpdateFilter = Builders<UserDTO>.Update.Set("UserId", user.UserId);

@@ -11,19 +11,19 @@ namespace Neo4jDal.Concrete
 {
     public class FollowerDal: IFollowerDal
     {
-        private readonly string conct;
-        private readonly string logg;
-        private readonly string pasw;
+        private readonly string _conn;
+        private readonly string _login;
+        private readonly string _pass;
         public FollowerDal(string conn,string login,string pass)
         {
-            this.conct = conn;
-            this.logg = login;
-            this.pasw = pass;
+            this._conn = conn;
+            this._login = login;
+            this._pass = pass;
         }
 
-        public void ToFollow(UserLableDTO from, UserLableDTO to)
+        public void AddFollow(UserLableDTO from, UserLableDTO to)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 client.Cypher
@@ -37,9 +37,9 @@ namespace Neo4jDal.Concrete
             }
         }
 
-        public void ToFollow(int from, int to)
+        public void AddFollow(int from, int to)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 client.Cypher
@@ -53,9 +53,9 @@ namespace Neo4jDal.Concrete
             }
         }
 
-        public void NewUser(UserLableDTO u)
+        public void AddUser(UserLableDTO u)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
 
@@ -66,9 +66,9 @@ namespace Neo4jDal.Concrete
             }
         }
 
-        public void DeleteInfo(UserLableDTO u1, UserLableDTO u2)
+        public void DeleteAllRelationships(UserLableDTO u1, UserLableDTO u2)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 client.Cypher
@@ -85,7 +85,7 @@ namespace Neo4jDal.Concrete
 
         public void DeleteUser(UserLableDTO u)
         {
-            using (var client = new GraphClient(new Uri(conct),logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn),_login, _pass))
             {
                 client.Connect();
                 client.Cypher
@@ -100,7 +100,7 @@ namespace Neo4jDal.Concrete
 
         public UserLableDTO GetUserById(int id)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 var user = client.Cypher
@@ -118,9 +118,9 @@ namespace Neo4jDal.Concrete
             }
         }
 
-        public bool IsInfo(UserLableDTO u1, UserLableDTO u2)
+        public bool HasAnyRelationship(UserLableDTO u1, UserLableDTO u2)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 var is_friends = client.Cypher
@@ -137,9 +137,9 @@ namespace Neo4jDal.Concrete
             }
         }
 
-        public bool IsInfoC(int from, int to)
+        public bool HasRelationship(int from, int to)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 var is_friends = client.Cypher
@@ -156,14 +156,14 @@ namespace Neo4jDal.Concrete
             }
         }
 
-        public int Path(UserLableDTO u1, UserLableDTO u2)
+        public int MinPathBetween(UserLableDTO u1, UserLableDTO u2)
         {
-            return this.Path(u1.UserId, u2.UserId);
+            return this.MinPathBetween(u1.UserId, u2.UserId);
         }
 
-        public int Path(int id1, int id2)
+        public int MinPathBetween(int id1, int id2)
         {
-            using (var client = new GraphClient(new Uri(conct), logg, pasw))
+            using (var client = new GraphClient(new Uri(_conn), _login, _pass))
             {
                 client.Connect();
                 var res = client.Cypher

@@ -9,10 +9,10 @@ namespace MongoDTO
 {
     public class CommentDTO
     {
-        [BsonElement("AuthorId")]
-        public int AuthorId { get; set; }
         [BsonElement("CommentId")]
         public int CommentId { get; set; }
+        [BsonElement("AuthorId")]
+        public int AuthorId { get; set; }
         [BsonElement("CommentText")]
         public string CommentText { get; set; }
     }
